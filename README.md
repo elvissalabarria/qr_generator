@@ -1,6 +1,6 @@
 # qr_generator
 
-A new Flutter project.
+this app for create qrCode, also exist a chrome extension.
 
 ## Getting Started
 
