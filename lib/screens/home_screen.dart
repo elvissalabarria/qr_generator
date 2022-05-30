@@ -15,6 +15,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
 
+import 'package:qr_generator/utils/utils.dart';
+
 // import 'package:learning_input_image/learning_input_image.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -218,10 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                       onPressed: () {
-                        // saveImageQr(qrNotifier.value);
-                        // takeScreenShot();
                         saveQrImage();
-                        // _saveNetworkImage();
                       },
                       child: const Text('Save image')),
                 ],
@@ -242,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final byteData = await (image.toByteData(format: ui.ImageByteFormat.png));
       if (byteData != null) {
         final pngBytes = byteData.buffer.asUint8List();
-        // getting directory of our phone
+
         final directory = (await getApplicationDocumentsDirectory()).path;
         final imgFile = File(
           '$directory/${DateTime.now()}qr.png',
@@ -279,15 +278,18 @@ class _HomeScreenState extends State<HomeScreen> {
     final buffer = data.buffer;
     File(path)
         .writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes))
-        .then((value) => {GallerySaver.saveImage(value.path)});
+        .then((value) => {
+              GallerySaver.saveImage(value.path).then((value) {
+                (value!)
+                    ? Utils().showError(context, "Image saved successfully")
+                    : Utils().showError(context, "Image not saved");
+              })
+            });
   }
 
   void recognizTexts() async {
-    // Creating an InputImage object using the image path
     final inputImage = InputImage.fromFilePath(imagePath);
-    // Retrieving the RecognisedText from the InputImage
     final text = await textDetector.processImage(inputImage);
-    // Finding text String(s)
     for (TextBlock block in text.blocks) {
       for (TextLine line in block.lines) {
         print('text: ${line.text}');
