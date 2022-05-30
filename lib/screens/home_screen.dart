@@ -27,18 +27,25 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController controller;
   late TextEditingController controllerUrlImage;
   final qrNotifier = ValueNotifier<String>('');
+  final colorNotifier = ValueNotifier<int>(0);
   final imageUrlNotifier =
       ValueNotifier<String>('https://avatars.githubusercontent.com/u/46904863?v=4');
   final formKey = GlobalKey<FormState>();
   final showImageNotifier = ValueNotifier<bool>(false);
+
   late String result;
   // InputImage? inputImage;
   final picker = ImagePicker();
   late final String imagePath;
-
+  final List<Color> listColor = [
+    Colors.black,
+    Colors.blue,
+    Colors.red,
+    Colors.green,
+    Colors.yellow,
+    Colors.brown
+  ];
   late TextRecognizer textDetector;
-  // final qrKey = GlobalKey();
-
   @override
   void initState() {
     super.initState();
@@ -80,105 +87,143 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      controller: controller,
-                      onChanged: (value) {
-                        createQrImage();
-                      },
-                      onFieldSubmitted: (value) {
-                        createQrImage();
-                      },
-                      decoration: const InputDecoration(
-                        isDense: true,
-                        labelText: 'Enter text to generate QR code',
-                      ),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      controller: controllerUrlImage,
-                      onChanged: (value) {
-                        imageUrlNotifier.value = controllerUrlImage.text;
-                      },
-                      onFieldSubmitted: (value) {
-                        imageUrlNotifier.value = controllerUrlImage.text;
-                      },
-                      decoration: const InputDecoration(
-                        isDense: true,
-                        labelText: 'Define URL image to generate QR code',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                height: 36,
-                child: ElevatedButton(
-                    onPressed: () {
-                      createQrImage();
-                    },
-                    child: const Text('Generate QR code')),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+          child: ValueListenableBuilder(
+            valueListenable: colorNotifier,
+            builder: (context, value, child) {
+              return Column(
                 children: [
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          keyboardType: TextInputType.multiline,
+                          controller: controller,
+                          onChanged: (value) {
+                            createQrImage();
+                          },
+                          onFieldSubmitted: (value) {
+                            createQrImage();
+                          },
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            labelText: 'Enter text to generate QR code',
+                          ),
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.multiline,
+                          controller: controllerUrlImage,
+                          onChanged: (value) {
+                            imageUrlNotifier.value = controllerUrlImage.text;
+                          },
+                          onFieldSubmitted: (value) {
+                            imageUrlNotifier.value = controllerUrlImage.text;
+                          },
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            labelText: 'Define URL image to generate QR code',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 36,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          createQrImage();
+                        },
+                        child: const Text('Generate QR code')),
+                  ),
+                  const SizedBox(height: 16),
                   const Text(
-                    'Show image in Qr?',
+                    'Select color Qr code',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  ValueListenableBuilder(
-                    valueListenable: showImageNotifier,
-                    builder: (context, value, child) {
-                      return Switch(
-                        value: showImageNotifier.value,
-                        onChanged: (value) {
-                          showImageNotifier.value = value;
-                        },
-                      );
-                    },
+                  Container(
+                    height: 70,
+                    width: double.infinity,
+                    margin: const EdgeInsets.all(10),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: InkWell(
+                              onTap: () {
+                                colorNotifier.value = index;
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  color: listColor[index],
+                                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                        itemCount: listColor.length,
+                        shrinkWrap: true),
                   ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              ValueListenableBuilder(
-                  valueListenable: qrNotifier,
-                  builder: (context, value, child) {
-                    return ValueListenableBuilder(
-                      valueListenable: imageUrlNotifier,
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Show image in Qr?',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      ValueListenableBuilder(
+                        valueListenable: showImageNotifier,
+                        builder: (context, value, child) {
+                          return Switch(
+                            value: showImageNotifier.value,
+                            onChanged: (value) {
+                              showImageNotifier.value = value;
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ValueListenableBuilder(
+                      valueListenable: qrNotifier,
                       builder: (context, value, child) {
                         return ValueListenableBuilder(
-                          valueListenable: showImageNotifier,
+                          valueListenable: imageUrlNotifier,
                           builder: (context, value, child) {
-                            return QrImage(
-                              embeddedImage: (showImageNotifier.value)
-                                  ? NetworkImage(imageUrlNotifier.value)
-                                  : null,
-                              data: qrNotifier.value,
-                              version: QrVersions.auto,
-                              size: 200.0,
+                            return ValueListenableBuilder(
+                              valueListenable: showImageNotifier,
+                              builder: (context, value, child) {
+                                return QrImage(
+                                  embeddedImage: (showImageNotifier.value)
+                                      ? NetworkImage(imageUrlNotifier.value)
+                                      : null,
+                                  data: qrNotifier.value,
+                                  version: QrVersions.auto,
+                                  foregroundColor: listColor[colorNotifier.value],
+                                  size: 200.0,
+                                );
+                              },
                             );
                           },
                         );
+                      }),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                      onPressed: () {
+                        // saveImageQr(qrNotifier.value);
+                        takeScreenShot();
                       },
-                    );
-                  }),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                  onPressed: () {
-                    // saveImageQr(qrNotifier.value);
-                    takeScreenShot();
-                  },
-                  child: const Text('Save image')),
-            ],
+                      child: const Text('Save image')),
+                ],
+              );
+            },
           ),
         ),
       ),
