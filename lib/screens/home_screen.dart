@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -218,7 +219,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                       onPressed: () {
                         // saveImageQr(qrNotifier.value);
-                        takeScreenShot();
+                        // takeScreenShot();
+                        saveQrImage();
+                        // _saveNetworkImage();
                       },
                       child: const Text('Save image')),
                 ],
@@ -250,23 +253,34 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> saveQrImage() async {
-    final directory = await getApplicationDocumentsDirectory();
-    File('${directory.path}/qr.png');
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+    final ts = DateTime.now().millisecondsSinceEpoch.toString();
+    String path = '$tempPath/$ts.png';
+    final qrValidationResult = QrValidator.validate(
+      data: qrNotifier.value,
+      version: QrVersions.auto,
+      errorCorrectionLevel: QrErrorCorrectLevel.L,
+    );
+    final qrCode = qrValidationResult.qrCode;
+
+    final painter = QrPainter.withQr(
+      qr: qrCode!,
+      color: listColor[colorNotifier.value],
+      gapless: true,
+      embeddedImageStyle: null,
+      embeddedImage: null,
+    );
+    final picData = await painter.toImageData(2048, format: ui.ImageByteFormat.png);
+    await writeToFile(picData!, path).then((value) => {});
   }
 
-  // Future captureImageFromCamera() async {
-  //   final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _image = File(pickedFile.path);
-  //       inputImage = InputImage.fromFilePath(pickedFile.path);
-  //       imageToText(inputImage);
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  // }
+  Future<void> writeToFile(ByteData data, String path) async {
+    final buffer = data.buffer;
+    File(path)
+        .writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes))
+        .then((value) => {GallerySaver.saveImage(value.path)});
+  }
 
   Future<void> captureAndSharePng() async {
     try {

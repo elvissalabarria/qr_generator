@@ -16,6 +16,8 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
   - Flutter (1.0.0)
+  - gallery_saver (0.0.1):
+    - Flutter
   - google_mlkit_barcode_scanning (0.3.0):
     - Flutter
     - google_mlkit_commons
@@ -310,6 +312,7 @@ PODS:
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - Flutter (from `Flutter`)
+  - gallery_saver (from `.symlinks/plugins/gallery_saver/ios`)
   - google_mlkit_barcode_scanning (from `.symlinks/plugins/google_mlkit_barcode_scanning/ios`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
   - google_mlkit_digital_ink_recognition (from `.symlinks/plugins/google_mlkit_digital_ink_recognition/ios`)
@@ -381,6 +384,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/camera/ios"
   Flutter:
     :path: Flutter
+  gallery_saver:
+    :path: ".symlinks/plugins/gallery_saver/ios"
   google_mlkit_barcode_scanning:
     :path: ".symlinks/plugins/google_mlkit_barcode_scanning/ios"
   google_mlkit_commons:
@@ -422,6 +427,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: fd0c8490f34287229c1d6c103d3a55f81ec85712
   FirebaseInstallations: 7d1d967a307c12f1aadd76844fc321cef699b1ce
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  gallery_saver: 9fc173c9f4fcc48af53b2a9ebea1b643255be542
   google_mlkit_barcode_scanning: 56e88993b6c915ce7134f9d77cb5b2de2fca8cfa
   google_mlkit_commons: e9070f57232c3a3e4bd42fdfa621bb1f4bb3e709
   google_mlkit_digital_ink_recognition: 7f3f58b2484d3887c30bcc1a00e9ca3bfbdb80ec

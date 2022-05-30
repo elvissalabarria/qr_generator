@@ -42,6 +42,7 @@ dependencies:
   image_gallery_saver: ^1.7.1
   permission_handler: ^9.2.0
   lottie: ^1.3.0
+  gallery_saver: ^2.3.2 
 
   # learning_text_recognition: ^0.0.4
   # icons_launcher: ^1.1.9
