@@ -272,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
       embeddedImage: null,
     );
     final picData = await painter.toImageData(2048, format: ui.ImageByteFormat.png);
-    await writeToFile(picData!, path).then((value) => {});
+    await writeToFile(picData!, path);
   }
 
   Future<void> writeToFile(ByteData data, String path) async {
@@ -280,24 +280,6 @@ class _HomeScreenState extends State<HomeScreen> {
     File(path)
         .writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes))
         .then((value) => {GallerySaver.saveImage(value.path)});
-  }
-
-  Future<void> captureAndSharePng() async {
-    try {
-      // ignore: prefer_typing_uninitialized_variables
-      var globalKey;
-      RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
-      var image = await boundary.toImage();
-      ByteData? byteData = await image.toByteData(format: ImageByteFormat.png);
-      Uint8List pngBytes = byteData!.buffer.asUint8List();
-      final tempDir = await getTemporaryDirectory();
-      final file = await File('${tempDir.path}/image.png').create();
-      await file.writeAsBytes(pngBytes);
-      const channel = MethodChannel('channel:me.alfian.share/share');
-      channel.invokeMethod('shareFile', 'image.png');
-    } catch (e) {
-      print(e.toString());
-    }
   }
 
   void recognizTexts() async {
