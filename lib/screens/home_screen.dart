@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final painter = QrPainter.withQr(
       qr: qrCode!,
-      color: listColor[colorNotifier.value],
+      color: (colorNotifier.value == 0) ? Colors.white : listColor[colorNotifier.value],
       gapless: true,
       embeddedImageStyle: null,
       embeddedImage: null,
