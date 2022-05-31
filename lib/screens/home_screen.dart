@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +12,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
-import 'package:google_ml_kit/google_ml_kit.dart';
 
 import 'package:qr_generator/utils/utils.dart';
 
@@ -51,13 +51,22 @@ class _HomeScreenState extends State<HomeScreen> {
   XFile? imageFile;
 
   String scannedText = '';
+  CameraController? controllerCamera;
+
+  // TextRecognizer? textDetector;
   @override
   void initState() {
     super.initState();
     imagePath = '';
     controller = TextEditingController();
     controllerUrlImage = TextEditingController();
+
+    // _initializeVision();
   }
+
+  // void _initializeVision() async {
+  //   textDetector = FirebaseVision.instance.textRecognizer();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -315,12 +324,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getImage() async {
     try {
-      final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
       if (pickedImage != null) {
         textScanning = true;
         imageFile = pickedImage;
-        setState(() {});
+
         getRecognisedText(pickedImage);
+        setState(() {});
       }
     } catch (e) {
       textScanning = true;
@@ -329,22 +339,91 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void getRecognisedText(XFile image) async {
-    final inputImage = InputImage.fromFilePath(image.path);
-    final textDectetor = GoogleMlKit.vision.textDetector();
+  // Future<String> _takePicture() async {
+  //   // Checking whether the controller is initialized
+  //   if (!controllerCamera!.value.isInitialized) {
+  //     print("Controller is not initialized");
+  //     return  "Controller is not initialized";
+  //   }
 
-    RecognisedText recognizedText = await textDectetor.processImage(inputImage);
-    await textDectetor.close();
-    scannedText = '';
-    for (TextBlock block in recognizedText.blocks) {
-      for (TextLine line in block.lines) {
-        for (TextElement element in line.elements) {
-          scannedText += "${element.text}${line.text}\n";
-        }
-      }
-    }
+  //   // Formatting Date and Time
+  //   String dateTime =
+  //       DateFormat.yMMMd().addPattern('-').add_Hms().format(DateTime.now()).toString();
+
+  //   String formattedDateTime = dateTime.replaceAll(' ', '');
+  //   print("Formatted: $formattedDateTime");
+
+  //   // Retrieving the path for saving an image
+  //   final Directory appDocDir = await getApplicationDocumentsDirectory();
+  //   final String visionDir = '${appDocDir.path}/Photos/Vision\ Images';
+  //   await Directory(visionDir).create(recursive: true);
+  //   final String imagePath = '$visionDir/image_$formattedDateTime.jpg';
+
+  //   // Checking whether the picture is being taken
+  //   // to prevent execution of the function again
+  //   // if previous execution has not ended
+  //   if (controllerCamera!.value.isTakingPicture) {
+  //     print("Processing is in progress...");
+  //     return "Processing is in progress...";
+  //   }
+
+  //   try {
+  //     // Captures the image and saves it to the
+  //     // provided path
+  //     await controllerCamera!.takePicture(imagePath);
+  //     // ignore: nullable_type_in_catch_clause
+  //   } on CameraException catch (e) {
+  //     print("Camera Exception: $e");
+  //     return controllerCamera;
+  //   }
+
+  //   return imagePath;
+  // }
+
+  void getRecognisedText(XFile image) async {
+    // final File imageFile = File(image.path);
+    // final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
+
+    // final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
+    // final VisionText visionText = await textRecognizer.processImage(visionImage);
+    // for (TextBlock block in visionText.blocks) {
+    //   for (TextLine line in block.lines) {
+    //     // Checking if the line contains an email address
+    //     scannedText += ('${line.text}\n');
+    //   }
+    // }
+    // final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
+
+    // FirebaseVision.instance.imageLabeler().processImage(visionImage).then((labels) {
+    //   print(labels.map((e) => e.text).toList());
+    // });
+    // FirebaseVision.instance.textRecognizer().processImage(visionImage).then((value) => {
+    //       // value.blocks.forEach((block) => {
+    //       //       block.lines.forEach((line) => {
+    //       //             line.elements
+    //       //                 .forEach((element) => {scannedText = "$scannedText${element.text!} "})
+    //       //           })
+    //       //     })
+    //       print(value.text),
+    //     });
+
+    // final inputImage = InputImage.fromFilePath(image.path);
+    // final File imageFile = File(image.path);
+
+    // final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
+    // final textDectetor = GoogleMlKit.vision.textDetector();
+// final FirebaseVisionImage visionImage =
+//      FirebaseVisionImage.fromFile(image.path);
+
+// final TextRecognizer textRecognizer =
+//      FirebaseVision.instance.textRecognizer();
+//   textDetector = FirebaseVision.instance.textRecognizer();
+    // await textDectetor.close();
+    // scannedText = '';
+
     controller.text = scannedText;
     textScanning = false;
+    print(scannedText);
     setState(() {});
   }
 
