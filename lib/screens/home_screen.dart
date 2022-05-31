@@ -1,23 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
+import 'package:google_ml_kit/google_ml_kit.dart';
 
 import 'package:qr_generator/utils/utils.dart';
-
-// import 'package:learning_input_image/learning_input_image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,7 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
     Colors.yellow,
     Colors.brown
   ];
-  late TextRecognizer textDetector;
+  // late TextRecognizer textDetector;
+
+  bool textScanning = false;
+
+  XFile? imageFile;
+
+  String scannedText = '';
   @override
   void initState() {
     super.initState();
@@ -66,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.qr_code),
             onPressed: () {
+              getImage();
               // textDetector = GoogleMlKit.vision.textRecognizer();
               // recognizTexts();
               // InputCameraView(
@@ -287,27 +290,62 @@ class _HomeScreenState extends State<HomeScreen> {
             });
   }
 
-  void recognizTexts() async {
-    final inputImage = InputImage.fromFilePath(imagePath);
-    final text = await textDetector.processImage(inputImage);
-    for (TextBlock block in text.blocks) {
-      for (TextLine line in block.lines) {
-        print('text: ${line.text}');
+  // void recognizTexts() async {
+  //   final inputImage = InputImage.fromFilePath(imagePath);
+  //   final text = await textDetector.processImage(inputImage);
+  //   for (TextBlock block in text.blocks) {
+  //     for (TextLine line in block.lines) {
+  //       print('text: ${line.text}');
+  //     }
+  //   }
+  // }
+
+  // Future imageToText(inputImage) async {
+  //   final textDetector = GoogleMlKit.vision.textRecognizer();
+  //   final RecognizedText recognizedText = await textDetector.processImage(inputImage);
+  //   setState(() {
+  //     String text = recognizedText.text;
+  //     for (TextBlock block in recognizedText.blocks) {
+  //       for (TextLine line in block.lines) {
+  //         for (TextElement element in line.elements) {}
+  //       }
+  //     }
+  //   });
+  // }
+
+  void getImage() async {
+    try {
+      final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        textScanning = true;
+        imageFile = pickedImage;
+        setState(() {});
+        getRecognisedText(pickedImage);
       }
+    } catch (e) {
+      textScanning = true;
+      imageFile = null;
+      scannedText = "Error occurred while scanning";
     }
   }
 
-  Future imageToText(inputImage) async {
-    final textDetector = GoogleMlKit.vision.textRecognizer();
-    final RecognizedText recognizedText = await textDetector.processImage(inputImage);
-    setState(() {
-      String text = recognizedText.text;
-      for (TextBlock block in recognizedText.blocks) {
-        for (TextLine line in block.lines) {
-          for (TextElement element in line.elements) {}
+  void getRecognisedText(XFile image) async {
+    final inputImage = InputImage.fromFilePath(image.path);
+    final textDectetor = GoogleMlKit.vision.textDetector();
+
+    RecognisedText recognizedText = await textDectetor.processImage(inputImage);
+    await textDectetor.close();
+    scannedText = '';
+    for (TextBlock block in recognizedText.blocks) {
+      for (TextLine line in block.lines) {
+        for (TextElement element in line.elements) {
+          scannedText += "${element.text}${line.text}\n";
         }
       }
-    });
+    }
+    controller.text = scannedText;
+    textScanning = false;
+    setState(() {});
   }
 
   void createQrImage() {
