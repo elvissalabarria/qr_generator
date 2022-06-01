@@ -1,7 +1,7 @@
 {
     "name": "qr_generator",
     "description": "Generate QR codes Extension for Chrome",
-    "version": "1.0.0",
+    "version": "1.0.1",
     
     "action":{
         "default_popup": "index.html",

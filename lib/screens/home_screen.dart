@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
+import 'package:universal_html/html.dart' as html;
 
+import 'package:http/http.dart' as http;
 import 'package:qr_generator/utils/utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ValueNotifier<String>('https://avatars.githubusercontent.com/u/46904863?v=4');
   final formKey = GlobalKey<FormState>();
   final showImageNotifier = ValueNotifier<bool>(false);
+  bool kIsWeb = identical(0, 0.0);
 
   late String result;
   // InputImage? inputImage;
@@ -60,8 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
     imagePath = '';
     controller = TextEditingController();
     controllerUrlImage = TextEditingController();
-
-    // _initializeVision();
   }
 
   // void _initializeVision() async {
@@ -77,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.qr_code),
             onPressed: () {
-              getImage();
+              // getImage();
               // textDetector = GoogleMlKit.vision.textRecognizer();
               // recognizTexts();
               // InputCameraView(
@@ -230,11 +233,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       }),
                   const SizedBox(height: 16),
-                  ElevatedButton(
-                      onPressed: () {
-                        saveQrImage();
-                      },
-                      child: const Text('Save image')),
+                  (!kIsWeb)
+                      ? ElevatedButton(
+                          onPressed: () {
+                            saveQrImage();
+                          },
+                          child: const Text('Save image'))
+                      : const SizedBox(),
                 ],
               );
             },
@@ -282,8 +287,39 @@ class _HomeScreenState extends State<HomeScreen> {
       embeddedImageStyle: null,
       embeddedImage: null,
     );
-    final picData = await painter.toImageData(2048, format: ui.ImageByteFormat.png);
-    await writeToFile(picData!, path);
+    if (!kIsWeb) {
+      final picData = await painter.toImageData(2048, format: ui.ImageByteFormat.png);
+      await writeToFile(picData!, path);
+    } else {}
+  }
+
+  Future<void> downloadImage(String imageUrl) async {
+    try {
+      // first we make a request to the url like you did
+      // in the android and ios version
+      final http.Response r = await http.get(
+        Uri.parse(imageUrl),
+      );
+
+      // we get the bytes from the body
+      final data = r.bodyBytes;
+      // and encode them to base64
+      final base64data = base64Encode(data);
+
+      // then we create and AnchorElement with the html package
+      final a = html.AnchorElement(href: 'data:image/jpeg;base64,$base64data');
+
+      // set the name of the file we want the image to get
+      // downloaded to
+      a.download = 'download.jpg';
+
+      // and we click the AnchorElement which downloads the image
+      a.click();
+      // finally we remove the AnchorElement
+      a.remove();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> writeToFile(ByteData data, String path) async {
