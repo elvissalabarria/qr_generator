@@ -36,19 +36,21 @@ dependencies:
   cupertino_icons: ^1.0.2
   qr_flutter: ^4.0.0
   path_provider: ^2.0.10
-  google_ml_kit: ^0.7.3
+  # google_ml_kit: ^0.7.3
   camera: ^0.9.4+5
   image_picker: ^0.8.4+9
   image_gallery_saver: ^1.7.1
   permission_handler: ^9.2.0
   lottie: ^1.3.0
   gallery_saver: ^2.3.2
-  firebase_core: ^1.17.1
+  # firebase_core: ^1.17.1
    # flutter_camera_ml_vision: ^3.0.1
   path_provider_ios: ^2.0.9
   intl: ^0.16.1
   http: ^0.13.1
   universal_html: ^2.0.8
+  file_picker: ^4.6.1
+  qr_utils: ^0.1.5
   # firebase_ml_vision: ^0.8.15
   # learning_text_recognition: ^0.0.4
   # icons_launcher: ^1.1.9

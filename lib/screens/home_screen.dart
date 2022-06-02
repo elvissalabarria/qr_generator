@@ -233,13 +233,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       }),
                   const SizedBox(height: 16),
-                  (!kIsWeb)
-                      ? ElevatedButton(
-                          onPressed: () {
-                            saveQrImage();
-                          },
-                          child: const Text('Save image'))
-                      : const SizedBox(),
+                  ElevatedButton(
+                      onPressed: () {
+                        saveQrImage();
+                      },
+                      child: const Text('Save image'))
                 ],
               );
             },
@@ -249,76 +247,36 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void takeScreenShot() async {
-    PermissionStatus res;
-    res = await Permission.storage.request();
-    if (res.isGranted) {
-      final boundary = formKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final image = await boundary.toImage(pixelRatio: 5.0);
-      final byteData = await (image.toByteData(format: ui.ImageByteFormat.png));
-      if (byteData != null) {
-        final pngBytes = byteData.buffer.asUint8List();
-
-        final directory = (await getApplicationDocumentsDirectory()).path;
-        final imgFile = File(
-          '$directory/${DateTime.now()}qr.png',
-        );
-        imgFile.writeAsBytes(pngBytes);
-      }
-    }
-  }
-
   Future<void> saveQrImage() async {
-    Directory tempDir = await getTemporaryDirectory();
-    String tempPath = tempDir.path;
-    final ts = DateTime.now().millisecondsSinceEpoch.toString();
-    String path = '$tempPath/$ts.png';
-    final qrValidationResult = QrValidator.validate(
-      data: qrNotifier.value,
-      version: QrVersions.auto,
-      errorCorrectionLevel: QrErrorCorrectLevel.L,
-    );
-    final qrCode = qrValidationResult.qrCode;
+    final image = await QrPainter(
+            data: qrNotifier.value,
+            version: QrVersions.auto,
+            errorCorrectionLevel: QrErrorCorrectLevel.Q,
+            color: (colorNotifier.value == 0) ? Colors.white : listColor[colorNotifier.value],
+            embeddedImage: null)
+        .toImageData(400);
 
-    final painter = QrPainter.withQr(
-      qr: qrCode!,
-      color: (colorNotifier.value == 0) ? Colors.white : listColor[colorNotifier.value],
-      gapless: true,
-      embeddedImageStyle: null,
-      embeddedImage: null,
-    );
     if (!kIsWeb) {
-      final picData = await painter.toImageData(2048, format: ui.ImageByteFormat.png);
-      await writeToFile(picData!, path);
-    } else {}
+      Directory tempDir = await getTemporaryDirectory();
+      String tempPath = tempDir.path;
+      final ts = DateTime.now().millisecondsSinceEpoch.toString();
+      String path = '$tempPath/$ts.png';
+      await writeToFile(image!, path);
+    } else {
+      var pngBytes = image!.buffer.asUint8List();
+
+      downloadImage(base64Encode(pngBytes));
+    }
   }
 
   Future<void> downloadImage(String imageUrl) async {
     try {
-      // first we make a request to the url like you did
-      // in the android and ios version
-      final http.Response r = await http.get(
-        Uri.parse(imageUrl),
-      );
-
-      // we get the bytes from the body
-      final data = r.bodyBytes;
-      // and encode them to base64
-      final base64data = base64Encode(data);
-
-      // then we create and AnchorElement with the html package
-      final a = html.AnchorElement(href: 'data:image/jpeg;base64,$base64data');
-
-      // set the name of the file we want the image to get
-      // downloaded to
+      final a = html.AnchorElement(href: 'data:image/jpeg;base64,$imageUrl');
       a.download = 'download.jpg';
-
-      // and we click the AnchorElement which downloads the image
       a.click();
-      // finally we remove the AnchorElement
       a.remove();
     } catch (e) {
-      print(e);
+      Utils().showError(context, "Error downloading image");
     }
   }
 
