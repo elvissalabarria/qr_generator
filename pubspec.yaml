@@ -38,7 +38,7 @@ dependencies:
   path_provider: ^2.0.10
   # google_ml_kit: ^0.7.3
   camera: ^0.9.4+5
-  image_picker: ^0.8.4+9
+  # image_picker: ^0.8.4+9
   image_gallery_saver: ^1.7.1
   permission_handler: ^9.2.0
   lottie: ^1.3.0
@@ -48,9 +48,12 @@ dependencies:
   path_provider_ios: ^2.0.9
   intl: ^0.16.1
   http: ^0.13.1
+  html: ^0.15.0
   universal_html: ^2.0.8
-  file_picker: ^4.6.1
+  # file_picker: ^4.6.1
   qr_utils: ^0.1.5
+  uni_links: ^0.5.1
+  shared_preferences: ^2.0.15
   # firebase_ml_vision: ^0.8.15
   # learning_text_recognition: ^0.0.4
   # icons_launcher: ^1.1.9
