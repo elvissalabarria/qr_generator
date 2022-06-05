@@ -1,20 +1,21 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+import 'dart:io' as io;
+
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'dart:ui' as ui;
 import 'package:universal_html/html.dart' as html;
+import 'package:html/dom.dart' as dom;
 
 import 'package:http/http.dart' as http;
 import 'package:qr_generator/utils/utils.dart';
@@ -36,10 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final formKey = GlobalKey<FormState>();
   final showImageNotifier = ValueNotifier<bool>(false);
   bool kIsWeb = identical(0, 0.0);
-
+  StreamSubscription? _sub;
+  late SharedPreferences prefs;
+  final String lastValue = 'lastValue';
+  final String urlImage = 'urlImage';
   late String result;
   // InputImage? inputImage;
-  final picker = ImagePicker();
+  // final picker = ImagePicker();
   late final String imagePath;
   final List<Color> listColor = [
     Colors.black,
@@ -65,6 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
     imagePath = '';
     controller = TextEditingController();
     controllerUrlImage = TextEditingController();
+    SharedPreferences.getInstance().then((value) {
+      prefs = value;
+      if (prefs.containsKey(lastValue)) {
+        controller.text = prefs.getString(lastValue)!;
+      }
+      if (prefs.containsKey(urlImage)) {
+        controllerUrlImage.text = prefs.getString(urlImage)!;
+      }
+    });
+
+    getWebsiteData();
   }
 
   // void _initializeVision() async {
@@ -123,9 +138,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           onFieldSubmitted: (value) {
                             createQrImage();
                           },
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             isDense: true,
-                            labelText: 'Enter text to generate QR code',
+                            labelText: (controller.text.isNotEmpty)
+                                ? controller.text
+                                : 'Enter text to generate QR code',
                           ),
                         ),
                         TextFormField(
@@ -133,13 +150,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           controller: controllerUrlImage,
                           onChanged: (value) {
                             imageUrlNotifier.value = controllerUrlImage.text;
+                            if (controllerUrlImage.text.isNotEmpty) {
+                              prefs.setString(urlImage, controllerUrlImage.text);
+                            }
                           },
                           onFieldSubmitted: (value) {
                             imageUrlNotifier.value = controllerUrlImage.text;
+                            if (controllerUrlImage.text.isNotEmpty) {
+                              prefs.setString(urlImage, controllerUrlImage.text);
+                            }
                           },
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             isDense: true,
-                            labelText: 'Define URL image to generate QR code',
+                            labelText: (controllerUrlImage.text.isNotEmpty)
+                                ? controllerUrlImage.text
+                                : 'Define URL image to generate QR code',
                           ),
                         ),
                       ],
@@ -247,6 +272,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future getWebsiteData() async {
+    final url =
+        Uri.parse('https://www.codegrepper.com/code-examples/whatever/event+js+get+selected+text');
+    final response = await http.get(url);
+    dom.Document document = dom.Document.html(response.body);
+    final tittle = document.getElementById("box1");
+    var selection = html.window.getSelection().toString();
+    print(selection);
+  }
+
   Future<void> saveQrImage() async {
     final image = await QrPainter(
             data: qrNotifier.value,
@@ -255,9 +290,12 @@ class _HomeScreenState extends State<HomeScreen> {
             color: (colorNotifier.value == 0) ? Colors.white : listColor[colorNotifier.value],
             embeddedImage: null)
         .toImageData(400);
-
+    prefs.setString(lastValue, qrNotifier.value);
+    if (imageUrlNotifier.value.isNotEmpty) {
+      prefs.setString(urlImage, imageUrlNotifier.value);
+    }
     if (!kIsWeb) {
-      Directory tempDir = await getTemporaryDirectory();
+      io.Directory tempDir = await getTemporaryDirectory();
       String tempPath = tempDir.path;
       final ts = DateTime.now().millisecondsSinceEpoch.toString();
       String path = '$tempPath/$ts.png';
@@ -266,6 +304,19 @@ class _HomeScreenState extends State<HomeScreen> {
       var pngBytes = image!.buffer.asUint8List();
 
       downloadImage(base64Encode(pngBytes));
+    }
+  }
+
+  Future<void> initUniLinks() async {
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      final initialLink = await getInitialLink();
+      // Parse the link and warn the user, if it is not correct,
+
+      // but keep in mind it could be `null`.
+    } on PlatformException {
+      // Handle exception by warning the user their action did not succeed
+      // return?
     }
   }
 
@@ -282,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> writeToFile(ByteData data, String path) async {
     final buffer = data.buffer;
-    File(path)
+    io.File(path)
         .writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes))
         .then((value) => {
               GallerySaver.saveImage(value.path).then((value) {
@@ -316,22 +367,22 @@ class _HomeScreenState extends State<HomeScreen> {
   //   });
   // }
 
-  void getImage() async {
-    try {
-      final pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
-      if (pickedImage != null) {
-        textScanning = true;
-        imageFile = pickedImage;
+  // void getImage() async {
+  //   try {
+  //     final pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+  //     if (pickedImage != null) {
+  //       textScanning = true;
+  //       imageFile = pickedImage;
 
-        getRecognisedText(pickedImage);
-        setState(() {});
-      }
-    } catch (e) {
-      textScanning = true;
-      imageFile = null;
-      scannedText = "Error occurred while scanning";
-    }
-  }
+  //       getRecognisedText(pickedImage);
+  //       setState(() {});
+  //     }
+  //   } catch (e) {
+  //     textScanning = true;
+  //     imageFile = null;
+  //     scannedText = "Error occurred while scanning";
+  //   }
+  // }
 
   // Future<String> _takePicture() async {
   //   // Checking whether the controller is initialized
@@ -425,6 +476,10 @@ class _HomeScreenState extends State<HomeScreen> {
     if (formKey.currentState!.validate()) {
       final qrDataInfo = controller.text.trim();
       qrNotifier.value = qrDataInfo;
+      prefs.setString(lastValue, qrNotifier.value);
+      if (imageUrlNotifier.value.isNotEmpty) {
+        prefs.setString(urlImage, imageUrlNotifier.value);
+      }
     }
   }
 }
