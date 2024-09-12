@@ -21,6 +21,7 @@ mixin _$QrEvent {
     required TResult Function() started,
     required TResult Function() onSaveImagen,
     required TResult Function() onChangeBody,
+    required TResult Function(int pos) onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$QrEvent {
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function(int pos)? onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$QrEvent {
     TResult Function()? started,
     TResult Function()? onSaveImagen,
     TResult Function()? onChangeBody,
+    TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$QrEvent {
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeColor value) onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$QrEvent {
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeColor value)? onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$QrEvent {
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +132,7 @@ class _$StartedImpl implements Started {
     required TResult Function() started,
     required TResult Function() onSaveImagen,
     required TResult Function() onChangeBody,
+    required TResult Function(int pos) onChangeColor,
   }) {
     return started();
   }
@@ -136,6 +143,7 @@ class _$StartedImpl implements Started {
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function(int pos)? onChangeColor,
   }) {
     return started?.call();
   }
@@ -146,6 +154,7 @@ class _$StartedImpl implements Started {
     TResult Function()? started,
     TResult Function()? onSaveImagen,
     TResult Function()? onChangeBody,
+    TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -160,6 +169,7 @@ class _$StartedImpl implements Started {
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return started(this);
   }
@@ -170,6 +180,7 @@ class _$StartedImpl implements Started {
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return started?.call(this);
   }
@@ -180,6 +191,7 @@ class _$StartedImpl implements Started {
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -237,6 +249,7 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
     required TResult Function() started,
     required TResult Function() onSaveImagen,
     required TResult Function() onChangeBody,
+    required TResult Function(int pos) onChangeColor,
   }) {
     return onSaveImagen();
   }
@@ -247,6 +260,7 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function(int pos)? onChangeColor,
   }) {
     return onSaveImagen?.call();
   }
@@ -257,6 +271,7 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
     TResult Function()? started,
     TResult Function()? onSaveImagen,
     TResult Function()? onChangeBody,
+    TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
     if (onSaveImagen != null) {
@@ -271,6 +286,7 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return onSaveImagen(this);
   }
@@ -281,6 +297,7 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return onSaveImagen?.call(this);
   }
@@ -291,6 +308,7 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {
     if (onSaveImagen != null) {
@@ -348,6 +366,7 @@ class _$OnChangeBodyImpl implements OnChangeBody {
     required TResult Function() started,
     required TResult Function() onSaveImagen,
     required TResult Function() onChangeBody,
+    required TResult Function(int pos) onChangeColor,
   }) {
     return onChangeBody();
   }
@@ -358,6 +377,7 @@ class _$OnChangeBodyImpl implements OnChangeBody {
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function(int pos)? onChangeColor,
   }) {
     return onChangeBody?.call();
   }
@@ -368,6 +388,7 @@ class _$OnChangeBodyImpl implements OnChangeBody {
     TResult Function()? started,
     TResult Function()? onSaveImagen,
     TResult Function()? onChangeBody,
+    TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
     if (onChangeBody != null) {
@@ -382,6 +403,7 @@ class _$OnChangeBodyImpl implements OnChangeBody {
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return onChangeBody(this);
   }
@@ -392,6 +414,7 @@ class _$OnChangeBodyImpl implements OnChangeBody {
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return onChangeBody?.call(this);
   }
@@ -402,6 +425,7 @@ class _$OnChangeBodyImpl implements OnChangeBody {
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {
     if (onChangeBody != null) {
@@ -413,4 +437,156 @@ class _$OnChangeBodyImpl implements OnChangeBody {
 
 abstract class OnChangeBody implements QrEvent {
   const factory OnChangeBody() = _$OnChangeBodyImpl;
+}
+
+/// @nodoc
+abstract class _$$OnChangeColorImplCopyWith<$Res> {
+  factory _$$OnChangeColorImplCopyWith(
+          _$OnChangeColorImpl value, $Res Function(_$OnChangeColorImpl) then) =
+      __$$OnChangeColorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int pos});
+}
+
+/// @nodoc
+class __$$OnChangeColorImplCopyWithImpl<$Res>
+    extends _$QrEventCopyWithImpl<$Res, _$OnChangeColorImpl>
+    implements _$$OnChangeColorImplCopyWith<$Res> {
+  __$$OnChangeColorImplCopyWithImpl(
+      _$OnChangeColorImpl _value, $Res Function(_$OnChangeColorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of QrEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pos = null,
+  }) {
+    return _then(_$OnChangeColorImpl(
+      null == pos
+          ? _value.pos
+          : pos // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnChangeColorImpl implements OnChangeColor {
+  const _$OnChangeColorImpl(this.pos);
+
+  @override
+  final int pos;
+
+  @override
+  String toString() {
+    return 'QrEvent.onChangeColor(pos: $pos)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnChangeColorImpl &&
+            (identical(other.pos, pos) || other.pos == pos));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pos);
+
+  /// Create a copy of QrEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnChangeColorImplCopyWith<_$OnChangeColorImpl> get copyWith =>
+      __$$OnChangeColorImplCopyWithImpl<_$OnChangeColorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() onSaveImagen,
+    required TResult Function() onChangeBody,
+    required TResult Function(int pos) onChangeColor,
+  }) {
+    return onChangeColor(pos);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? onSaveImagen,
+    TResult? Function()? onChangeBody,
+    TResult? Function(int pos)? onChangeColor,
+  }) {
+    return onChangeColor?.call(pos);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? onSaveImagen,
+    TResult Function()? onChangeBody,
+    TResult Function(int pos)? onChangeColor,
+    required TResult orElse(),
+  }) {
+    if (onChangeColor != null) {
+      return onChangeColor(pos);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Started value) started,
+    required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeColor value) onChangeColor,
+  }) {
+    return onChangeColor(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Started value)? started,
+    TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeColor value)? onChangeColor,
+  }) {
+    return onChangeColor?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Started value)? started,
+    TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeColor value)? onChangeColor,
+    required TResult orElse(),
+  }) {
+    if (onChangeColor != null) {
+      return onChangeColor(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnChangeColor implements QrEvent {
+  const factory OnChangeColor(final int pos) = _$OnChangeColorImpl;
+
+  int get pos;
+
+  /// Create a copy of QrEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnChangeColorImplCopyWith<_$OnChangeColorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$QrState {
   String get body => throw _privateConstructorUsedError;
   bool get imageSaved => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
 
   /// Create a copy of QrState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +31,7 @@ abstract class $QrStateCopyWith<$Res> {
   factory $QrStateCopyWith(QrState value, $Res Function(QrState) then) =
       _$QrStateCopyWithImpl<$Res, QrState>;
   @useResult
-  $Res call({String body, bool imageSaved});
+  $Res call({String body, bool imageSaved, Color color});
 }
 
 /// @nodoc
@@ -50,6 +51,7 @@ class _$QrStateCopyWithImpl<$Res, $Val extends QrState>
   $Res call({
     Object? body = null,
     Object? imageSaved = null,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
       body: null == body
@@ -60,6 +62,10 @@ class _$QrStateCopyWithImpl<$Res, $Val extends QrState>
           ? _value.imageSaved
           : imageSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ) as $Val);
   }
 }
@@ -71,7 +77,7 @@ abstract class _$$QrStateImplCopyWith<$Res> implements $QrStateCopyWith<$Res> {
       __$$QrStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String body, bool imageSaved});
+  $Res call({String body, bool imageSaved, Color color});
 }
 
 /// @nodoc
@@ -89,6 +95,7 @@ class __$$QrStateImplCopyWithImpl<$Res>
   $Res call({
     Object? body = null,
     Object? imageSaved = null,
+    Object? color = null,
   }) {
     return _then(_$QrStateImpl(
       body: null == body
@@ -99,6 +106,10 @@ class __$$QrStateImplCopyWithImpl<$Res>
           ? _value.imageSaved
           : imageSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -106,7 +117,8 @@ class __$$QrStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$QrStateImpl implements _QrState {
-  _$QrStateImpl({this.body = '', this.imageSaved = false});
+  _$QrStateImpl(
+      {this.body = '', this.imageSaved = false, this.color = Colors.black});
 
   @override
   @JsonKey()
@@ -114,10 +126,13 @@ class _$QrStateImpl implements _QrState {
   @override
   @JsonKey()
   final bool imageSaved;
+  @override
+  @JsonKey()
+  final Color color;
 
   @override
   String toString() {
-    return 'QrState(body: $body, imageSaved: $imageSaved)';
+    return 'QrState(body: $body, imageSaved: $imageSaved, color: $color)';
   }
 
   @override
@@ -127,11 +142,12 @@ class _$QrStateImpl implements _QrState {
             other is _$QrStateImpl &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.imageSaved, imageSaved) ||
-                other.imageSaved == imageSaved));
+                other.imageSaved == imageSaved) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, body, imageSaved);
+  int get hashCode => Object.hash(runtimeType, body, imageSaved, color);
 
   /// Create a copy of QrState
   /// with the given fields replaced by the non-null parameter values.
@@ -143,12 +159,17 @@ class _$QrStateImpl implements _QrState {
 }
 
 abstract class _QrState implements QrState {
-  factory _QrState({final String body, final bool imageSaved}) = _$QrStateImpl;
+  factory _QrState(
+      {final String body,
+      final bool imageSaved,
+      final Color color}) = _$QrStateImpl;
 
   @override
   String get body;
   @override
   bool get imageSaved;
+  @override
+  Color get color;
 
   /// Create a copy of QrState
   /// with the given fields replaced by the non-null parameter values.

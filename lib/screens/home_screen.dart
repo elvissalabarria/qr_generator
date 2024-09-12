@@ -45,14 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // InputImage? inputImage;
   // final picker = ImagePicker();
   late final String imagePath;
-  final List<Color> listColor = [
-    Colors.black,
-    Colors.blue,
-    Colors.red,
-    Colors.green,
-    Colors.yellow,
-    Colors.brown
-  ];
+  
   // late TextRecognizer textDetector;
 
   bool textScanning = false;
@@ -279,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
             data: qrNotifier.value,
             version: QrVersions.auto,
             errorCorrectionLevel: QrErrorCorrectLevel.Q,
-            color: (colorNotifier.value == 0) ? Colors.white : listColor[colorNotifier.value],
+            color: (colorNotifier.value == 0) ? Colors.black : listColor[colorNotifier.value],
             embeddedImage: null)
         .toImageData(400);
     prefs.setString(lastValue, qrNotifier.value);

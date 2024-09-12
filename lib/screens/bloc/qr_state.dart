@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'qr_state.freezed.dart';
@@ -8,6 +9,7 @@ class QrState with _$QrState {
     {
     @Default('') String body,
      @Default(false) bool imageSaved,
+     @Default(Colors.black) Color color,
      }) =
       _QrState;
 }
