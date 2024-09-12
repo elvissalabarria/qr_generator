@@ -243,15 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             return ValueListenableBuilder(
                               valueListenable: showImageNotifier,
                               builder: (context, value, child) {
-                                return QrImage(
-                                  embeddedImage: (showImageNotifier.value)
-                                      ? NetworkImage(imageUrlNotifier.value)
-                                      : null,
-                                  data: qrNotifier.value,
-                                  version: QrVersions.auto,
-                                  foregroundColor: listColor[colorNotifier.value],
-                                  size: 200.0,
-                                );
+                                return Text('asas');
                               },
                             );
                           },
