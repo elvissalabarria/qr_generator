@@ -6,6 +6,8 @@ part 'qr_event.freezed.dart';
 class QrEvent with _$QrEvent {
   const factory QrEvent.started() = Started;
   const factory QrEvent.onSaveImagen() = OnSaveImagen;
+  const factory QrEvent.onShowImagen() = OnShowImagen;
   const factory QrEvent.onChangeBody() = OnChangeBody;
-  const factory QrEvent.onChangeColor(int pos)= OnChangeColor;
+  const factory QrEvent.onChangeImageUrl()= OnChangeImageUrl;
+  const factory QrEvent.onChangeColor(int pos) = OnChangeColor;
 }

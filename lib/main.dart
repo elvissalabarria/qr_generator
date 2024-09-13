@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qr_generator/screens/bloc/qr_bloc.dart';
 import 'package:qr_generator/screens/home_screen.dart';
 
 Future<void> main() async {
@@ -6,7 +8,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: BlocProvider(
+        create: (context) => QrBloc(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }

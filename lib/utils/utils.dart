@@ -2,8 +2,17 @@ import 'dart:io';
 
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class Utils {
+   final List<Color> listColor = [
+    Colors.black,
+    Colors.blue,
+    Colors.red,
+    Colors.green,
+    Colors.yellow,
+    Colors.brown
+  ];
   Widget buildLoadingWidget() {
     return const Center(
         child: SizedBox(

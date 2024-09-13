@@ -20,7 +20,9 @@ mixin _$QrEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
     required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
     required TResult Function(int pos) onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$QrEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
     TResult? Function(int pos)? onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$QrEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
     TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
     TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) =>
@@ -45,7 +51,9 @@ mixin _$QrEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
     required TResult Function(OnChangeColor value) onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +61,9 @@ mixin _$QrEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult? Function(OnChangeColor value)? onChangeColor,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +71,9 @@ mixin _$QrEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) =>
@@ -131,7 +143,9 @@ class _$StartedImpl implements Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
     required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
     required TResult Function(int pos) onChangeColor,
   }) {
     return started();
@@ -142,7 +156,9 @@ class _$StartedImpl implements Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
     TResult? Function(int pos)? onChangeColor,
   }) {
     return started?.call();
@@ -153,7 +169,9 @@ class _$StartedImpl implements Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
     TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
     TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -168,7 +186,9 @@ class _$StartedImpl implements Started {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
     required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return started(this);
@@ -179,7 +199,9 @@ class _$StartedImpl implements Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return started?.call(this);
@@ -190,7 +212,9 @@ class _$StartedImpl implements Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -248,7 +272,9 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
     required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
     required TResult Function(int pos) onChangeColor,
   }) {
     return onSaveImagen();
@@ -259,7 +285,9 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
     TResult? Function(int pos)? onChangeColor,
   }) {
     return onSaveImagen?.call();
@@ -270,7 +298,9 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
     TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
     TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -285,7 +315,9 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
     required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return onSaveImagen(this);
@@ -296,7 +328,9 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return onSaveImagen?.call(this);
@@ -307,7 +341,9 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -320,6 +356,135 @@ class _$OnSaveImagenImpl implements OnSaveImagen {
 
 abstract class OnSaveImagen implements QrEvent {
   const factory OnSaveImagen() = _$OnSaveImagenImpl;
+}
+
+/// @nodoc
+abstract class _$$OnShowImagenImplCopyWith<$Res> {
+  factory _$$OnShowImagenImplCopyWith(
+          _$OnShowImagenImpl value, $Res Function(_$OnShowImagenImpl) then) =
+      __$$OnShowImagenImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnShowImagenImplCopyWithImpl<$Res>
+    extends _$QrEventCopyWithImpl<$Res, _$OnShowImagenImpl>
+    implements _$$OnShowImagenImplCopyWith<$Res> {
+  __$$OnShowImagenImplCopyWithImpl(
+      _$OnShowImagenImpl _value, $Res Function(_$OnShowImagenImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of QrEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$OnShowImagenImpl implements OnShowImagen {
+  const _$OnShowImagenImpl();
+
+  @override
+  String toString() {
+    return 'QrEvent.onShowImagen()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnShowImagenImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
+    required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
+    required TResult Function(int pos) onChangeColor,
+  }) {
+    return onShowImagen();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
+    TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
+    TResult? Function(int pos)? onChangeColor,
+  }) {
+    return onShowImagen?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
+    TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
+    TResult Function(int pos)? onChangeColor,
+    required TResult orElse(),
+  }) {
+    if (onShowImagen != null) {
+      return onShowImagen();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Started value) started,
+    required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
+    required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
+    required TResult Function(OnChangeColor value) onChangeColor,
+  }) {
+    return onShowImagen(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Started value)? started,
+    TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
+    TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
+    TResult? Function(OnChangeColor value)? onChangeColor,
+  }) {
+    return onShowImagen?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Started value)? started,
+    TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
+    TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
+    TResult Function(OnChangeColor value)? onChangeColor,
+    required TResult orElse(),
+  }) {
+    if (onShowImagen != null) {
+      return onShowImagen(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnShowImagen implements QrEvent {
+  const factory OnShowImagen() = _$OnShowImagenImpl;
 }
 
 /// @nodoc
@@ -365,7 +530,9 @@ class _$OnChangeBodyImpl implements OnChangeBody {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
     required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
     required TResult Function(int pos) onChangeColor,
   }) {
     return onChangeBody();
@@ -376,7 +543,9 @@ class _$OnChangeBodyImpl implements OnChangeBody {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
     TResult? Function(int pos)? onChangeColor,
   }) {
     return onChangeBody?.call();
@@ -387,7 +556,9 @@ class _$OnChangeBodyImpl implements OnChangeBody {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
     TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
     TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -402,7 +573,9 @@ class _$OnChangeBodyImpl implements OnChangeBody {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
     required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return onChangeBody(this);
@@ -413,7 +586,9 @@ class _$OnChangeBodyImpl implements OnChangeBody {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return onChangeBody?.call(this);
@@ -424,7 +599,9 @@ class _$OnChangeBodyImpl implements OnChangeBody {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -437,6 +614,135 @@ class _$OnChangeBodyImpl implements OnChangeBody {
 
 abstract class OnChangeBody implements QrEvent {
   const factory OnChangeBody() = _$OnChangeBodyImpl;
+}
+
+/// @nodoc
+abstract class _$$OnChangeImageUrlImplCopyWith<$Res> {
+  factory _$$OnChangeImageUrlImplCopyWith(_$OnChangeImageUrlImpl value,
+          $Res Function(_$OnChangeImageUrlImpl) then) =
+      __$$OnChangeImageUrlImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnChangeImageUrlImplCopyWithImpl<$Res>
+    extends _$QrEventCopyWithImpl<$Res, _$OnChangeImageUrlImpl>
+    implements _$$OnChangeImageUrlImplCopyWith<$Res> {
+  __$$OnChangeImageUrlImplCopyWithImpl(_$OnChangeImageUrlImpl _value,
+      $Res Function(_$OnChangeImageUrlImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of QrEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$OnChangeImageUrlImpl implements OnChangeImageUrl {
+  const _$OnChangeImageUrlImpl();
+
+  @override
+  String toString() {
+    return 'QrEvent.onChangeImageUrl()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnChangeImageUrlImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
+    required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
+    required TResult Function(int pos) onChangeColor,
+  }) {
+    return onChangeImageUrl();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
+    TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
+    TResult? Function(int pos)? onChangeColor,
+  }) {
+    return onChangeImageUrl?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
+    TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
+    TResult Function(int pos)? onChangeColor,
+    required TResult orElse(),
+  }) {
+    if (onChangeImageUrl != null) {
+      return onChangeImageUrl();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Started value) started,
+    required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
+    required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
+    required TResult Function(OnChangeColor value) onChangeColor,
+  }) {
+    return onChangeImageUrl(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Started value)? started,
+    TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
+    TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
+    TResult? Function(OnChangeColor value)? onChangeColor,
+  }) {
+    return onChangeImageUrl?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Started value)? started,
+    TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
+    TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
+    TResult Function(OnChangeColor value)? onChangeColor,
+    required TResult orElse(),
+  }) {
+    if (onChangeImageUrl != null) {
+      return onChangeImageUrl(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnChangeImageUrl implements QrEvent {
+  const factory OnChangeImageUrl() = _$OnChangeImageUrlImpl;
 }
 
 /// @nodoc
@@ -509,7 +815,9 @@ class _$OnChangeColorImpl implements OnChangeColor {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() onSaveImagen,
+    required TResult Function() onShowImagen,
     required TResult Function() onChangeBody,
+    required TResult Function() onChangeImageUrl,
     required TResult Function(int pos) onChangeColor,
   }) {
     return onChangeColor(pos);
@@ -520,7 +828,9 @@ class _$OnChangeColorImpl implements OnChangeColor {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? onSaveImagen,
+    TResult? Function()? onShowImagen,
     TResult? Function()? onChangeBody,
+    TResult? Function()? onChangeImageUrl,
     TResult? Function(int pos)? onChangeColor,
   }) {
     return onChangeColor?.call(pos);
@@ -531,7 +841,9 @@ class _$OnChangeColorImpl implements OnChangeColor {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? onSaveImagen,
+    TResult Function()? onShowImagen,
     TResult Function()? onChangeBody,
+    TResult Function()? onChangeImageUrl,
     TResult Function(int pos)? onChangeColor,
     required TResult orElse(),
   }) {
@@ -546,7 +858,9 @@ class _$OnChangeColorImpl implements OnChangeColor {
   TResult map<TResult extends Object?>({
     required TResult Function(Started value) started,
     required TResult Function(OnSaveImagen value) onSaveImagen,
+    required TResult Function(OnShowImagen value) onShowImagen,
     required TResult Function(OnChangeBody value) onChangeBody,
+    required TResult Function(OnChangeImageUrl value) onChangeImageUrl,
     required TResult Function(OnChangeColor value) onChangeColor,
   }) {
     return onChangeColor(this);
@@ -557,7 +871,9 @@ class _$OnChangeColorImpl implements OnChangeColor {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Started value)? started,
     TResult? Function(OnSaveImagen value)? onSaveImagen,
+    TResult? Function(OnShowImagen value)? onShowImagen,
     TResult? Function(OnChangeBody value)? onChangeBody,
+    TResult? Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult? Function(OnChangeColor value)? onChangeColor,
   }) {
     return onChangeColor?.call(this);
@@ -568,7 +884,9 @@ class _$OnChangeColorImpl implements OnChangeColor {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Started value)? started,
     TResult Function(OnSaveImagen value)? onSaveImagen,
+    TResult Function(OnShowImagen value)? onShowImagen,
     TResult Function(OnChangeBody value)? onChangeBody,
+    TResult Function(OnChangeImageUrl value)? onChangeImageUrl,
     TResult Function(OnChangeColor value)? onChangeColor,
     required TResult orElse(),
   }) {

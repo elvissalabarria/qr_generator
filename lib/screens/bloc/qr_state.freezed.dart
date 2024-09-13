@@ -17,8 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$QrState {
   String get body => throw _privateConstructorUsedError;
+  String get urlImagen => throw _privateConstructorUsedError;
   bool get imageSaved => throw _privateConstructorUsedError;
+  bool get showImage => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
+  bool get errorCreateImage => throw _privateConstructorUsedError;
 
   /// Create a copy of QrState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +34,13 @@ abstract class $QrStateCopyWith<$Res> {
   factory $QrStateCopyWith(QrState value, $Res Function(QrState) then) =
       _$QrStateCopyWithImpl<$Res, QrState>;
   @useResult
-  $Res call({String body, bool imageSaved, Color color});
+  $Res call(
+      {String body,
+      String urlImagen,
+      bool imageSaved,
+      bool showImage,
+      Color color,
+      bool errorCreateImage});
 }
 
 /// @nodoc
@@ -50,22 +59,37 @@ class _$QrStateCopyWithImpl<$Res, $Val extends QrState>
   @override
   $Res call({
     Object? body = null,
+    Object? urlImagen = null,
     Object? imageSaved = null,
+    Object? showImage = null,
     Object? color = null,
+    Object? errorCreateImage = null,
   }) {
     return _then(_value.copyWith(
       body: null == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
+      urlImagen: null == urlImagen
+          ? _value.urlImagen
+          : urlImagen // ignore: cast_nullable_to_non_nullable
+              as String,
       imageSaved: null == imageSaved
           ? _value.imageSaved
           : imageSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showImage: null == showImage
+          ? _value.showImage
+          : showImage // ignore: cast_nullable_to_non_nullable
               as bool,
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
+      errorCreateImage: null == errorCreateImage
+          ? _value.errorCreateImage
+          : errorCreateImage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -77,7 +101,13 @@ abstract class _$$QrStateImplCopyWith<$Res> implements $QrStateCopyWith<$Res> {
       __$$QrStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String body, bool imageSaved, Color color});
+  $Res call(
+      {String body,
+      String urlImagen,
+      bool imageSaved,
+      bool showImage,
+      Color color,
+      bool errorCreateImage});
 }
 
 /// @nodoc
@@ -94,22 +124,37 @@ class __$$QrStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? body = null,
+    Object? urlImagen = null,
     Object? imageSaved = null,
+    Object? showImage = null,
     Object? color = null,
+    Object? errorCreateImage = null,
   }) {
     return _then(_$QrStateImpl(
       body: null == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
+      urlImagen: null == urlImagen
+          ? _value.urlImagen
+          : urlImagen // ignore: cast_nullable_to_non_nullable
+              as String,
       imageSaved: null == imageSaved
           ? _value.imageSaved
           : imageSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showImage: null == showImage
+          ? _value.showImage
+          : showImage // ignore: cast_nullable_to_non_nullable
               as bool,
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
+      errorCreateImage: null == errorCreateImage
+          ? _value.errorCreateImage
+          : errorCreateImage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -118,21 +163,35 @@ class __$$QrStateImplCopyWithImpl<$Res>
 
 class _$QrStateImpl implements _QrState {
   _$QrStateImpl(
-      {this.body = '', this.imageSaved = false, this.color = Colors.black});
+      {this.body = '',
+      this.urlImagen = '',
+      this.imageSaved = false,
+      this.showImage = false,
+      this.color = Colors.black,
+      this.errorCreateImage = false});
 
   @override
   @JsonKey()
   final String body;
   @override
   @JsonKey()
+  final String urlImagen;
+  @override
+  @JsonKey()
   final bool imageSaved;
   @override
   @JsonKey()
+  final bool showImage;
+  @override
+  @JsonKey()
   final Color color;
+  @override
+  @JsonKey()
+  final bool errorCreateImage;
 
   @override
   String toString() {
-    return 'QrState(body: $body, imageSaved: $imageSaved, color: $color)';
+    return 'QrState(body: $body, urlImagen: $urlImagen, imageSaved: $imageSaved, showImage: $showImage, color: $color, errorCreateImage: $errorCreateImage)';
   }
 
   @override
@@ -141,13 +200,20 @@ class _$QrStateImpl implements _QrState {
         (other.runtimeType == runtimeType &&
             other is _$QrStateImpl &&
             (identical(other.body, body) || other.body == body) &&
+            (identical(other.urlImagen, urlImagen) ||
+                other.urlImagen == urlImagen) &&
             (identical(other.imageSaved, imageSaved) ||
                 other.imageSaved == imageSaved) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.showImage, showImage) ||
+                other.showImage == showImage) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.errorCreateImage, errorCreateImage) ||
+                other.errorCreateImage == errorCreateImage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, body, imageSaved, color);
+  int get hashCode => Object.hash(runtimeType, body, urlImagen, imageSaved,
+      showImage, color, errorCreateImage);
 
   /// Create a copy of QrState
   /// with the given fields replaced by the non-null parameter values.
@@ -161,15 +227,24 @@ class _$QrStateImpl implements _QrState {
 abstract class _QrState implements QrState {
   factory _QrState(
       {final String body,
+      final String urlImagen,
       final bool imageSaved,
-      final Color color}) = _$QrStateImpl;
+      final bool showImage,
+      final Color color,
+      final bool errorCreateImage}) = _$QrStateImpl;
 
   @override
   String get body;
   @override
+  String get urlImagen;
+  @override
   bool get imageSaved;
   @override
+  bool get showImage;
+  @override
   Color get color;
+  @override
+  bool get errorCreateImage;
 
   /// Create a copy of QrState
   /// with the given fields replaced by the non-null parameter values.
